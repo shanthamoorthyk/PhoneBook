@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Phone Book by AngularJS</title>
+  <!--CSS Reference-->
+  <link rel='stylesheet' href='https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css'>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+
+<body ng-app="addrBook" ng-controller="myCtrl">
+    <div class="container">
+        <div class="panel panel-info">
+            <div class="panel-heading">           
+                <div class="panel-title">
+                <h3 class="text-center">Phone Book</h3>
+                                
+                </div>      
+            </div>
+            <div class="panel-body">
+            <form class="form-horizontal">
+                <div class="form-group has-info has-feedback">
+                    <label for="seacrh" class="col-sm-2 control-label">Search: </label>
+                    <div class="col-sm-5">
+                        <input type="text"  name="search" ng-model ="test" class="form-control">
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>                                            
+                    </div>
+                </div>
+            </form> 
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Phone Number</th>
+                        <th>Actions</th>
+                    </tr>
+                   </thead>
+                   <tbody>
+                    <tr ng-repeat="x in info | filter:test">
+                        <td><span ng-hide="showMe($index)">{{x.firstName}}</span><input text="text"class="form-control input-sm" ng-model="x.firstName" ng-show="showMe($index)"></td>
+                        <td><span ng-hide="showMe($index)">{{x.lastName}}</span><input text="text"class="form-control input-sm" ng-model="x.lastName" ng-show="showMe($index)"></td>
+                        <td><span ng-hide="showMe($index)">{{x.phone}}</span><input text="text" class="form-control input-sm" ng-model="x.phone" pattern="\d*" maxlength="10" ng-show="showMe($index)"></td>
+                        <td><a href="#" ng-click="removeContact()"><span class="glyphicon glyphicon-trash"></span>&nbsp;</a>/<a href="#" ng-click="change()" ng-hide="showMe($index)"> <span class="glyphicon glyphicon-edit"></span></a></a><a href="#" ng-click="save()" ng-show="showMe($index)">&nbsp;<span class="glyphicon glyphicon-ok"></span></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="panel-footer">
+                <form name="phoneBookForm" id="phoneBookForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control" name="firstName" ng-model="firstName" required>
+                                <div class="error" ng-show="phoneBookForm.firstName.$dirty && phoneBookForm.firstName.$invalid">
+                                    <span ng-show="phoneBookForm.firstName.$error.required">First name is required.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" name="lastName" ng-model="lastName" required>
+                                <div class="error" ng-show="phoneBookForm.lastName.$dirty && phoneBookForm.lastName.$invalid">
+                                    <span ng-show="phoneBookForm.lastName.$error.required">Last name is required.</span>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" class="form-control" name="phone" ng-model="phone" required pattern="\d*" maxlength="10">
+                                <div class="error" ng-show="phoneBookForm.phone.$dirty && phoneBookForm.phone.$invalid">
+                                    <span ng-show="phoneBookForm.phone.$error.required">Phone is required.</span>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <input type="button" class="btn btn-primary btn-sm" value="Add" ng-click="addItem()" ng-disabled="phoneBookForm.$invalid">   
+                              </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>   
+
+            
+    </div>
+<!--JS Reference-->
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js'></script>
+  <script  src="./script.js"></script>
+
+</body>
+</html>
